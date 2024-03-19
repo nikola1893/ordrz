@@ -1,0 +1,34 @@
+<h1>New Order</h1>
+
+<%= form_with(model: @order, local: true) do |form| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+      <ul>
+        <% @order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: 'form-control', placeholder: 'Email' %>
+  </div>
+
+  <%= form.fields_for :stops do |stop_form| %>
+    <div class="field">
+      <%= stop_form.label :stop_type %>
+      <%= stop_form.select :kind, [['Load', 'load'], ['Unload', 'unload']], {}, { prompt: 'Type of stop' } %>
+    </div>
+    <div class="field">
+      <%= stop_form.label :address %>
+      <%= stop_form.text_field :address, class: 'form-control', placeholder: 'Address' %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

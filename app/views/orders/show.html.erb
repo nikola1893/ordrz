@@ -1,0 +1,13 @@
+<h1>Order Details</h1>
+
+<p><strong>Confirmation Token:</strong> <%= @order.confirmation_token %></p>
+
+<h2>Stops</h2>
+<ul>
+  <% @order.stops.each do |stop| %>
+    <li><%= stop.kind %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>
