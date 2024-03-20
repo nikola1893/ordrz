@@ -9,11 +9,13 @@ class Order < ApplicationRecord
 
   def send_confirmation_email
     client = Postmark::ApiClient.new(ENV['POSTMARK_API_TOKEN'])
+    confirmation_link = "#{Rails.application.config.domain_name}/orders/#{confirmation_token}/view"
+
     client.deliver(
       from: 'info@deezpatch.com',
       to: self.email,
-      subject: 'Hello from Postmark',
-      html_body: '<strong>Hello</strong> dear Postmark user.',
+      subject: 'You have a new dispatch.',
+      html_body: "<strong>Hello</strong> please confirm the transport order at this <a href='#{confirmation_link}'>link</a>",
       track_opens: true,
       message_stream: 'outbound')
   end
