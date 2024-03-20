@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   private
 
   def send_confirmation_email
-    client = Postmark::ApiClient.new('1f29c9d9-532a-4633-bddc-bcc92087e5ae')
+    client = Postmark::ApiClient.new(ENV['POSTMARK_API_TOKEN'])
     client.deliver(
       from: 'info@deezpatch.com',
       to: self.email,
