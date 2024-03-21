@@ -21,10 +21,10 @@
             <td><%= order.number %></td>
             <td><%= order.status %></td>
             <td class="ms-display-flex ms-flex-justify-end">
-                <%= link_to 'View', order_path(order), class: 'ms-btn' %>
-                <%= link_to 'Edit', edit_order_path(order), class: 'ms-btn' %>
-                <%= form_with(model: order, method: :delete, url: order_path(order), data: { confirm: 'Are you sure?' }) do |form| %>
-                    <%= form.submit 'Destroy', class: '' %>
+                <% if policy(order).edit? %>
+                    <%= link_to 'Edit', edit_order_path(order), class: 'ms-btn' %>
+                <% else %>
+                    <%= link_to 'View confirmation', view_order_path(confirmation_token: order.confirmation_token), class: 'ms-btn' %>
                 <% end %>
             </td>
         </tr>

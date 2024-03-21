@@ -1,6 +1,8 @@
 <div class="ms-menu px-3">
     <div class="ms-menu-logo">
-        <img src="https://minstyle.io/img/logo.png" />
+        <%= link_to root_path do %>
+            <h5 class="ms-div-center"><strong>Deezpatch.com</strong></h5>
+        <% end %>
     </div>
     <nav class="ms-menu-link">
         <input type="checkbox" id="ms-menu-toggle" />
@@ -9,9 +11,14 @@
         ></label>
         <ul>
             <li><a href="">EN</a></li>
-            <li><a href="">Profile</a></li>
-            <li><a href="">Orders</a></li>
-            <li><input type="text" placeholder="Search everything" name="" id="" /></li>
+            <% if current_user.present?  %>
+                <li><a href="">Profile</a></li>
+                <li><a href="">Orders</a></li>
+                <li><input type="text" placeholder="Search everything" name="" id="" /></li>
+            <% else %>
+                <li><a href="">Login</a></li>
+                <li><a href="">Register</a></li>
+            <% end %>
         </ul>
     </nav>
 </div>

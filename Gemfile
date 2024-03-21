@@ -9,6 +9,7 @@ gem "devise"
 gem 'postmark', group: :production
 gem 'postmark-rails'
 gem 'tailwindcss-rails'
+gem 'pundit'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

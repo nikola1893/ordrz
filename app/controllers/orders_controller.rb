@@ -1,6 +1,7 @@
 # app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:view_order, :confirm]
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
     @orders = current_user.orders
@@ -22,12 +23,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-    @order = current_user.orders.find(params[:id])
-  end
-
   def view_order
     @order = Order.find_by(confirmation_token: params[:confirmation_token])
+    authorize @order, :view_order?
     if @order.nil?
       flash[:alert] = 'Invalid confirmation token.'
       redirect_to root_path
@@ -36,10 +34,12 @@ class OrdersController < ApplicationController
 
   def edit
     @order = current_user.orders.find(params[:id])
+    authorize @order
   end
 
   def update
     @order = current_user.orders.find(params[:id])
+    authorize @order
     if @order.update(order_params)
       redirect_to orders_path, notice: 'Order was successfully updated.'
     else
@@ -49,6 +49,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = current_user.orders.find(params[:id])
+    authorize @order
     @order.destroy
     redirect_to orders_path, notice: 'Order was successfully destroyed.'
   end
@@ -72,6 +73,11 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
 
   def generate_token
     SecureRandom.hex(10)

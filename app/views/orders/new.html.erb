@@ -21,13 +21,16 @@
   </div>
 
   <%= form.fields_for :stops do |stop_form| %>
-    <div class="field">
-      <%= stop_form.label :stop_type %>
-      <%= stop_form.select :kind, [['Load', 'load'], ['Unload', 'unload']], {}, { prompt: 'Type of stop' } %>
-    </div>
-    <div class="field">
-      <%= stop_form.label :address %>
-      <%= stop_form.text_field :address, class: 'form-control', placeholder: 'Address' %>
+    <div class="ms-display-flex">
+
+      <div class="field">
+        <%= stop_form.label :address %>
+        <%= stop_form.text_field :address, class: 'form-control', placeholder: 'Address' %>
+      </div>
+      <div class="field">
+        <%= stop_form.label :stop_type %>
+        <%= stop_form.select :kind, [['Load', 'load'], ['Unload', 'unload']], {}, { prompt: 'Type of stop' } %>
+      </div>
     </div>
   <% end %>
 
