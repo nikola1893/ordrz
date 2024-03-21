@@ -3,6 +3,7 @@
   <head>
     <title>Ordrz</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -19,8 +20,11 @@
   </head>
 
   <body>
-    <%= notice %>
-    <%= alert %>
-    <%= yield %>
+    <%= render 'shared/menu' %>
+    <div class="px-5 py-4">
+      <%= notice %>
+      <%= alert %>
+      <%= yield %>
+    </div>
   </body>
 </html>

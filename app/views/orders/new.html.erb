@@ -1,5 +1,8 @@
-<h1>New Order</h1>
-
+<%= link_to root_path do %>
+  <i class="fa fa-solid fa-arrow-left"></i>
+  Back
+<% end %>
+<h3><strong>New Order<strong></h3>
 <%= form_with(model: @order, local: true) do |form| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
@@ -29,6 +32,6 @@
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"ms-btn ms-primary mt-4" %>
   </div>
 <% end %>

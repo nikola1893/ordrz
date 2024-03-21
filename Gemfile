@@ -8,6 +8,7 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 gem "devise"
 gem 'postmark', group: :production
 gem 'postmark-rails'
+gem 'tailwindcss-rails'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
