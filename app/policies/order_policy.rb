@@ -19,6 +19,19 @@ class OrderPolicy
   end
 
   def view_order?
-    order.status == "confirmed"
+    if user.present?
+      if order.user == user
+        if order.status == "pending"
+          false
+        else
+          true
+        end
+      else
+        true
+      end
+    else
+      true
+    end
   end
+
 end
