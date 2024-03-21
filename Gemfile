@@ -10,6 +10,7 @@ gem 'postmark', group: :production
 gem 'postmark-rails'
 gem 'tailwindcss-rails'
 gem 'pundit'
+gem "rqrcode"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

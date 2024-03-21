@@ -24,6 +24,18 @@ class OrdersController < ApplicationController
   end
 
   def view_order
+    require "rqrcode"
+    qrcode = RQRCode::QRCode.new(request.original_url)
+    @svg = qrcode.as_svg(
+      color: :black,
+      offset: 8,
+      fill: :white,
+      shape_rendering: "crispEdges",
+      module_size: 4,
+      standalone: true,
+      use_path: true
+    )
+
     @order = Order.find_by(confirmation_token: params[:confirmation_token])
     authorize @order, :view_order?
     if @order.nil?
