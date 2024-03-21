@@ -1,14 +1,17 @@
-<h1>Orders</h1>
 
-<%= link_to 'New Order', new_order_path, class:"ms-btn ms-primary" %>
+<div class="ms-display-flex ms-flex-justify-between ms-flex-align-items-center">
+    <h4 class="font-bold"><strong>Orders</strong></h4>
 
-<table class="w-100">
+    <%= link_to 'New Order', new_order_path, class:"ms-btn ms-primary" %>
+</div>
+
+<table class="w-100 table-auto">
     <thead>
         <tr class="ms-text-left">
             <th>Confirmation Token</th>
             <th>Number</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th class="ms-text-right">Actions</th>
         </tr>
     </thead>
 
@@ -18,7 +21,7 @@
             <td><%= link_to order.confirmation_token, confirm_order_path(confirmation_token: order.confirmation_token)%></td>
             <td><%= link_to order.number, order_path(order) %></td>
             <td><%= order.status %></td>
-            <td class="ms-display-flex">
+            <td class="ms-display-flex ms-flex-justify-end">
                 <%= link_to 'Edit', edit_order_path(order), class: 'ms-btn' %>
                 <%= form_with(model: order, method: :delete, url: order_path(order), data: { confirm: 'Are you sure?' }) do |form| %>
                     <%= form.submit 'Destroy', class: '' %>
@@ -28,3 +31,4 @@
         <% end %>
     </tbody>
 </table>
+
