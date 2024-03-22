@@ -3,9 +3,28 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :stops, dependent: :destroy
   accepts_nested_attributes_for :stops, allow_destroy: true
-  after_create :send_confirmation_email
+  after_create :send_confirmation_email, :generate_token, :generate_number
+
+  def load_count
+    stops.where(kind: 'load').count
+  end
+
+  def unload_count
+    stops.where(kind: 'unload').count
+  end
 
   private
+
+  def generate_token
+    token = SecureRandom.hex(10)
+    update(confirmation_token: token)
+  end
+
+  def generate_number
+    prefix = SecureRandom.hex(3)
+    datetime = Time.now.strftime("%d%m%y%H%M")
+    update(number: "#{datetime}-#{prefix.upcase}")
+  end
 
   def send_confirmation_email
     client = Postmark::ApiClient.new(ENV['POSTMARK_API_TOKEN'])

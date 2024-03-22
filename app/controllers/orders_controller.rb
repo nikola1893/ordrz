@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.reverse
   end
 
   def new
@@ -14,8 +14,6 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.build(order_params)
-    @order.confirmation_token = generate_token
-    @order.number = generate_number
     if @order.save
       redirect_to orders_path, notice: 'Order was successfully created.'
     else
@@ -89,14 +87,6 @@ class OrdersController < ApplicationController
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(request.referrer || root_path)
-  end
-
-  def generate_token
-    SecureRandom.hex(10)
-  end
-
-  def generate_number
-    "#{Time.zone.now.strftime('%d%m%Y')}-#{SecureRandom.alphanumeric(5).upcase}"
   end
 
   def order_params
