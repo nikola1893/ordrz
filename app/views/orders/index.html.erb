@@ -10,6 +10,7 @@
     <thead>
         <tr class="ms-text-left">
             <th>Number</th>
+            <th>Sent to</th>
             <th>Status</th>
             <th class="ms-text-right">Actions</th>
         </tr>
@@ -19,6 +20,7 @@
         <% @orders.each do |order| %>
         <tr>
             <td><%= order.number %></td>
+            <td><%= order.email %></td>
             <td><%= order.status %></td>
             <td class="ms-display-flex ms-flex-justify-end">
                 <% if policy(order).edit? %>
