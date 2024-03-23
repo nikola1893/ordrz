@@ -1,8 +1,8 @@
 <%= link_to root_path do %>
-  <i class="fa fa-solid fa-arrow-left"></i>
+  <i class="fa fa-solid fa-arrow-left mb-5"></i>
   Back
 <% end %>
-<h3><strong>New Order<strong></h3>
+<h3 class="title">New Order</h3>
 <%= form_with(model: @order, local: true) do |form| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
@@ -16,25 +16,30 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, class: 'form-control', placeholder: 'Email' %>
+    <%= form.label :email, class:"label" %>
+    <%= form.text_field :email, type: "email", class: 'input', placeholder: 'Email' %>
   </div>
 
   <%= form.fields_for :stops do |stop_form| %>
-    <div class="ms-display-flex">
+    <div class="is-flex">
 
       <div class="field">
-        <%= stop_form.label :address %>
-        <%= stop_form.text_field :address, class: 'form-control', placeholder: 'Address' %>
+        <%= stop_form.label :address, class:"label" %>
+        <%= stop_form.text_field :address, class: 'input', placeholder: 'Address' %>
       </div>
+
       <div class="field">
-        <%= stop_form.label :stop_type %>
-        <%= stop_form.select :kind, [['Load', 'load'], ['Unload', 'unload']], {}, { prompt: 'Type of stop' } %>
+        <%= stop_form.label :stop_type, class:"label" %>
+        <div class="select">
+          <%= stop_form.select :kind, [['Load', 'load'], ['Unload', 'unload']], {}, { prompt: 'Type of stop' } %>
+        </div>
       </div>
+
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit class:"ms-btn ms-primary mt-4" %>
+  <div class="actions mt-4">
+    <%= form.submit class:"button is-primary" %>
   </div>
 <% end %>
+

@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ordrz</title>
+    <title>Deezpatch.com</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/minstyle.io@2.0.2/dist/css/minstyle.io.min.css">
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/dark-mode-switcher@0.0.1/dist/dark.min.js"
-    ></script>
     <script src="https://kit.fontawesome.com/857b3be6db.js" crossorigin="anonymous"></script>
-
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
+    >
   </head>
-
   <body>
-    <%= render 'shared/menu' %>
-    <div class="px-5 py-4">
+    <%= render "shared/menu" %>
+    <div class="p-6">
       <%= notice %>
       <%= alert %>
       <%= yield %>

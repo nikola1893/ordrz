@@ -1,20 +1,19 @@
-<div class="ms-display-flex ms-flex-justify-between ms-flex-align-items-center mb-4">
-    <h3 class="font-bold">
-        Orders
-    </h3>
 
-    <%= link_to 'New Order', new_order_path, class:"ms-btn ms-primary" %>
+<div class="">
+    <h1 class="title">Orders</h1>
+
+    <%= link_to 'New Order', new_order_path, class:"button is-primary mb-4" %>
 </div>
 
-<table class="ms-table">
+<table class="table is-fullwidth">
     <thead>
-        <tr class="ms-text-left">
+        <tr>
             <th>Number</th>
             <th>Sent to</th>
             <th>Pickup</th>
             <th>Dropoff</th>
             <th>Status</th>
-            <th class="ms-text-right">Actions</th>
+            <th>Actions</th>
         </tr>
     </thead>
 
@@ -26,7 +25,7 @@
             <td><%= order.load_count %></td>
             <td><%= order.unload_count %></td>
             <td><%= order.status %></td>
-            <td class="ms-text-right">
+            <td>
                 <% if policy(order).edit? %>
                     <%= link_to 'Edit', edit_order_path(order), class: 'ms-btn' %>
                 <% else %>
