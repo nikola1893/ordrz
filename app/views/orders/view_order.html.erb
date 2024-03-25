@@ -5,7 +5,11 @@
 <p>Order ID: <%= @order.id %></p>
 <!-- Add more details as needed -->
 <p>Order Status: <%= @order.status %></p>
+<p>Truck: <%= @order.truck_number %></p>
+<p>Driver: <%= @order.driver_name %></p>
 <p>Created at: <%= @order.created_at.strftime("%B %d, %Y") %></p>
 <%= form_with(url: confirm_order_path(confirmation_token: @order.confirmation_token), method: :post) do |f| %>
+  <%= f.text_field :truck_number, placeholder: 'Truck Number' %>
+  <%= f.text_field :driver_name, placeholder: 'Driver Name' %>
   <%= f.submit 'Confirm Order' %>
 <% end %>
