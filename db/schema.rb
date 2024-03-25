@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_160157) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_25_120524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_160157) do
     t.string "status", default: "pending"
     t.string "confirmation_email"
     t.string "number"
+    t.string "truck_number"
+    t.string "driver_name"
+    t.text "terms"
+    t.string "price"
+    t.string "due_in"
+    t.string "company"
+    t.string "language"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -43,6 +50,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_160157) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

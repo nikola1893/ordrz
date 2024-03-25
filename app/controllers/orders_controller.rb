@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
 
     if @order.status == 'pending'
     # Update the order status to confirmed (you might have a different implementation for this)
-      @order.update(status: 'confirmed')
+      @order.update(status: 'confirmed', truck_number: params[:truck_number], driver_name: params[:driver_name])
       flash[:alert] = 'Order has been confirmed.'
 
     else
@@ -90,7 +90,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:confirmation_token, :email, stops_attributes: [:id, :kind, :address, :_destroy])
+    params.require(:order).permit(:confirmation_token, :truck_number, :driver_name, :email, stops_attributes: [:id, :kind, :address, :_destroy])
   end
 
 end
