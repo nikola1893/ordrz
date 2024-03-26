@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
     if @order.status == 'pending'
     # Update the order status to confirmed (you might have a different implementation for this)
       @order.update(status: 'confirmed', truck_number: params[:truck_number], driver_name: params[:driver_name])
-      flash[:alert] = 'Order has been confirmed.'
+      flash[:notice] = 'Order has been confirmed.'
 
     else
       flash[:alert] = 'Order has already been confirmed.'
