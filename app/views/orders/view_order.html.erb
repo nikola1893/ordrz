@@ -1,15 +1,34 @@
-<div class="ms-display-flex ms-flex-justify-between ms-flex-align-items-top">
-  <h1>Order Details</h1>
+<style>
+  @media print {
+   nav {
+     display: none;
+   }
+ }
+</style>
+<div class="is-flex is-justify-content-space-between">
+  <div>
+    <h1 class="title">Transport Order</h1>
+    <p>Token: <%= @order.confirmation_token %></p>
+    <!-- Add more details as needed -->
+    <% if @order.status == "confirmed" %>
+      <p>Truck: <%= @order.truck_number %></p>
+      <p>Driver: <%= @order.driver_name %></p>
+    <% end %>
+    <p>Created at: <%= @order.created_at.strftime("%B %d, %Y") %></p>
+    <% if @order.status == "pending" %>
+      <%= form_with(url: confirm_order_path(confirmation_token: @order.confirmation_token), method: :post) do |f| %>
+        <div class="field mt-4">
+          <%= f.label :address, class:"label" %>
+          <%= f.text_field :truck_number, placeholder: 'Truck Number', class:"input" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :address, class:"label" %>
+          <%= f.text_field :driver_name, placeholder: 'Driver Name', class:"input" %>
+        </div>
+        <%= f.submit 'Confirm Order', class:"button is-primary is-fullwidth" %>
+      <% end %>
+    <% end %>
+  </div>
   <%= raw(@svg.html_safe) %>
 </div>
-<p>Order ID: <%= @order.id %></p>
-<!-- Add more details as needed -->
-<p>Order Status: <%= @order.status %></p>
-<p>Truck: <%= @order.truck_number %></p>
-<p>Driver: <%= @order.driver_name %></p>
-<p>Created at: <%= @order.created_at.strftime("%B %d, %Y") %></p>
-<%= form_with(url: confirm_order_path(confirmation_token: @order.confirmation_token), method: :post) do |f| %>
-  <%= f.text_field :truck_number, placeholder: 'Truck Number' %>
-  <%= f.text_field :driver_name, placeholder: 'Driver Name' %>
-  <%= f.submit 'Confirm Order' %>
-<% end %>

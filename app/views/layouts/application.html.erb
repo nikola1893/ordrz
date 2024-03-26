@@ -16,8 +16,16 @@
   <body>
     <%= render "shared/menu" %>
     <div class="p-6">
-      <%= notice %>
-      <%= alert %>
+      <% if notice.present? %>
+        <div class="has-text-primary has-text-weight-semibold mb-4">
+          <%= notice %>
+        </div>
+      <% end %>
+      <% if alert.present? %>
+        <div class="has-text-danger has-text-weight-semibold mb-4">
+          <%= alert %>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>
